@@ -1,9 +1,8 @@
 services:
-  # 1. Backend Service
+  # 1. Backend Service (Express)
   - type: web
     name: rent-ai-backend
     env: node
-    plan: free
     region: ohio
     buildCommand: cd backend && npm install
     startCommand: cd backend && node index.js
@@ -13,10 +12,9 @@ services:
       - key: NODE_ENV
         value: production
 
-  # 2. Frontend Service 
+  # 2. Frontend Service (Static Site)
   - type: web
     name: rent-ai-frontend
     env: static
-    plan: free
     buildCommand: cd frontend/my-project && npm install && npm run build
     staticPublishPath: frontend/my-project/dist
