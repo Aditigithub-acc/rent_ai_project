@@ -1,15 +1,22 @@
 services:
-  # 1. Backend Service (Node.js/Express)
+  # Backend Service
   - type: web
     name: rent-ai-backend
-    env: node
+    runtime: node
     plan: free
+    region: ohio
     buildCommand: cd backend && npm install
-    startCommand: cd backend && node index.js 
+    startCommand: cd backend && node index.js
+    envVars:
+      - key: MONGODB_URI
+        sync: false # Isse ye dashboard par value maangega
+      - key: NODE_ENV
+        value: production
 
-  # 2. Frontend Service (Vite/React Static Site)
+  # Frontend Service
   - type: static
     name: rent-ai-frontend
-    env: static
+    runtime: static
+    plan: free
     buildCommand: cd frontend/my-project && npm install && npm run build
-    publishPath: frontend/my-project/dist 
+    publishPath: frontend/my-project/dist
